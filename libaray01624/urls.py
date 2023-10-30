@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from mysite.views import homepage
+from mysite import views as mv
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',homepage),
+    path('post/<slug:slug>/', mv.showpost, name="showpost")#slug代表是變數(用<內容就是你在資料庫打的網址名稱>)  如果輸入post/.../就跑去那個函式
 ]
