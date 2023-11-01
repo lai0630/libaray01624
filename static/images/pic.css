@@ -1,0 +1,9 @@
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px; /* 可选，用于设置图像之间的间距 */
+  }
+  
+  .image-container img {
+    max-width: 100%;
+  }
