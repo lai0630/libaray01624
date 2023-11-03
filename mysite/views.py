@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from mysite.models import Post
 from datetime import datetime
 from django.shortcuts import redirect
+from django.shortcuts import render, redirect
+from django import forms as LoginForm
 
 
 def homepage(request):
