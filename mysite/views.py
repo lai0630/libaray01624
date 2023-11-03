@@ -19,3 +19,6 @@ def showpost(request, slug):
 			return render(request, 'post.html', locals())
 	except:
 		return redirect('/')
+
+def log(request):
+	return render(request, 'login.html')
