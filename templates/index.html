@@ -5,10 +5,10 @@
 {% endblock %}
 {% block content %} 
      {% for post in posts %}
-    <div class='card' style='background-color:#E6E6F2'>
+    <div class='card' style='background-color:#D2E9FF'>
         <div class='card-header'>
-            <p style='font-family:微軟正黑體;font-size:16pt;font-weight:bold;'>
-                <a href='/post/{{post.slug}}'>{{ post.title }}</a>
+            <p style='font-family:微軟正黑體;font-size:20pt;font-weight:bolder;'>
+                <a href='/post/{{post.slug}}' style="color:9F5000">{{ post.title }}</a>
             </p>
         </div>
         <div class='card-body' style='background-color:#ffffdd'>
@@ -16,7 +16,7 @@
                {{ post.body | truncatechars:40 }}
             </p>
         </div>
-        <div class='card-footer'  style='background-color:#efefef'>
+        <div class='card-footer'  style='background-color:#D2E9FF;font-weight:bold;font-size:14pt;'>
             <p>
                 發佈時間：{{ post.pub_date | date:"Y M d, h:m:s A"}}
             </p>
