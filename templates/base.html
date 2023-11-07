@@ -16,7 +16,7 @@
         <table align="center" border="1" width="1800" >
             <tr>
                 <td>
-                    <div class="container-fluid" style='background-color:#DAD2B9'><!--最外層框架 沒有fluid就是 旁邊有留白 秀中間的 有的話就是強制滿版-->
+                    <div class="container-fluid" style='background-color:#F7F5EB'><!--最外層框架 沒有fluid就是 旁邊有留白 秀中間的 有的話就是強制滿版-->
                         {% include "header.html" %}<!--包括 直接複製一份過來這裡 所以她的頁面還會是base-->
                         <div class="row"><!--先切一列出來 剛好分出來是左右-->
                             <div class="col-sm-3 col-md-3"><!--切左邊是3欄 加起來不可以超過12-->
@@ -40,14 +40,14 @@
                             </div>
                             <div class="col-sm-9 col-md-9"><!--他都在row裡面 切右邊是9欄 每一欄都可以繼續切 也是加起來不超過12個-->
                                 <div class="card">
-                                    <div class="card-header" style="background-color:B3BACC;"><!--在卡片的最上面放 headmessage-->
+                                    <div class="card-header" style="background-color:C6CEBE;"><!--在卡片的最上面放 headmessage-->
                                         {% block headmessage %} <!--他會把post那邊的空洞蓋掉 但是字體那些都會在-->
                                         {% endblock %}<!--endblock後面可加可不加 headmessage-->
                                     </div>
-                                    <div class="card-body" style="background-color:B3BACC;">
+                                    <div class="card-body" style="background-color:C6CEBE;">
                                         {% block content %} {% endblock %}
                                     </div>
-                                    <div class="card-footer">
+                                    <div class="card-footer" style="background-color:C6CEBE;">
                                         {% include 'footer.html' %}<!--這邊是指現在時刻那邊-->
                                     </div>
                                 </div>

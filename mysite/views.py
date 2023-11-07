@@ -22,3 +22,4 @@ def showpost(request, slug):
 
 def log(request):
 	return render(request, 'login.html')
+	
