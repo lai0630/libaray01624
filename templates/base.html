@@ -16,17 +16,17 @@
         <table align="center" border="1" width="1800" >
             <tr>
                 <td>
-                    <div class="container-fluid" style='background-color:#F8F4E0'><!--最外層框架 沒有fluid就是 旁邊有留白 秀中間的 有的話就是強制滿版-->
+                    <div class="container-fluid" style='background-color:#DAD2B9'><!--最外層框架 沒有fluid就是 旁邊有留白 秀中間的 有的話就是強制滿版-->
                         {% include "header.html" %}<!--包括 直接複製一份過來這裡 所以她的頁面還會是base-->
                         <div class="row"><!--先切一列出來 剛好分出來是左右-->
                             <div class="col-sm-3 col-md-3"><!--切左邊是3欄 加起來不可以超過12-->
                                 <div class="card"><!--有不同的預設class 可以在bootstrap可以找的到-->
-                                    <div class="card-header" style='background-color:#84C1FF'>
-                                        <h3>Menu</h3>
+                                    <div class="card-header" style='background-color:#5D847D'>
+                                        <h3 style='font-family:微軟正黑體;font-weight:bold;font-size:24pt;color:FFFFFF;'>Menu</h3>
                                     </div>
                                     <div calss="card-body"><!--card這個東西裡面的內容-->
-                                        <div class="list-group" >
-                                            <a href='/' class="list-group-item">HOME</a><!--回到首頁-->
+                                        <div class="list-group" style='font-family:微軟正黑體;font-weight:bold;font-size:16pt;'>
+                                            <a href='/' class="list-group-item" > HOME</a><!--回到首頁-->
                                             <a href='https://www.hchs.hc.edu.tw/ischool/publish_page/59/?cid=1901 ' class="list-group-item">借閱排行榜</a><!--跑到該網址 並且標題是即時新聞-->
                                             <a href='https://www.ncl.edu.tw/' class="list-group-item">國家圖書館</a><!--跑到該網址 並且標題是Youtube-->
                                             <a href='https://www.books.com.tw/?gclid=Cj0KCQjwqP2pBhDMARIsAJQ0CzpYN0mXE1mKcgnGtIO6vMVjHQRhK0K8MsFNmU_wUXK3jvbk_DzoAvoaAkfMEALw_wcB' class="list-group-item">購書網站</a>
@@ -40,11 +40,11 @@
                             </div>
                             <div class="col-sm-9 col-md-9"><!--他都在row裡面 切右邊是9欄 每一欄都可以繼續切 也是加起來不超過12個-->
                                 <div class="card">
-                                    <div class="card-header"><!--在卡片的最上面放 headmessage-->
+                                    <div class="card-header" style="background-color:B3BACC;"><!--在卡片的最上面放 headmessage-->
                                         {% block headmessage %} <!--他會把post那邊的空洞蓋掉 但是字體那些都會在-->
                                         {% endblock %}<!--endblock後面可加可不加 headmessage-->
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" style="background-color:B3BACC;">
                                         {% block content %} {% endblock %}
                                     </div>
                                     <div class="card-footer">
