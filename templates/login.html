@@ -1,21 +1,26 @@
 <html>
+    {% load static %}
+    <div class='well'><body background="https://img.onl/e9SQF" style="background-size:2000px 1200px">
+    </div>
+    
 <head>
-    <title>登入系統</title>
-    <h1><a class="btn btn-sm" style="font-size:20px" align="center" href='/'>回首頁</a></h1>
+    <title>會員登入</title>
+    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br> 
+    <h1><a class="btn btn-sm" style="font-size:30px;" align="center" href='/'>回首頁</a></h1>
 </head>
 <body>
-
-<h2 style="font-size:30pt;background-color:#D3D2DF;" align="center">登入帳密</h2>
-
+<h2 class="btn btn-sm" style="font-size:40pt; background-color:#ACC4CF;margin-top:10px" align="center">登入帳密</h2>
 <form action="login.php" method="post" align="center">
-    <label for="username" style="color:1D5F53;font-size:24pt;font-weight:bolder">帳號：</label>
+    <label for="username" style="color:1D5F53;font-size:32pt;font-weight:bolder;">帳號：</label>
     <input type="text" id="username" name="username" required><br><br>
 
-    <label for="password" style="color:1D5F53;font-size:24pt;font-weight:bolder">密碼：</label>
+    <label for="password" style="color:1D5F53;font-size:32pt;font-weight:bolder">密碼：</label>
     <input type="password" id="password" name="password" required><br><br>
 
-    <input type="submit" value="登入" style="font-size:16pt;font-weight:bold;">
+    <a href="/" style="font-size:30pt;font-weight:bold;">登入</a>
+    {% comment %} <input type="submit" value="" "> {% endcomment %}
 </form>
 
 </body>
+
 </html>
