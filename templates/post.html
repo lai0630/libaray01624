@@ -7,8 +7,10 @@
     <h4><a href='/'>回首頁</a></h4>
 {% endblock %}
 {% block content %} 
+        
         <p style='font-family:微軟正黑體;font-size:16pt;letter-spacing:2pt;'>
             {{ post.body | convert_markdown | safe }}</a>
+            館藏狀態:{{post.formatted_is_borrow|safe}}
         </p>
 {% endblock %}
 
