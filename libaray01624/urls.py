@@ -24,5 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homepage),
     path('post/<slug:slug>/', mv.showpost, name="showpost"),#slug代表是變數(用<內容就是你在資料庫打的網址名稱>)  如果輸入post/.../就跑去那個函式
-    path('login/',mv.log,name="login")
+    path('login/',mv.log,name="login"),
+    path('book_list/', mv.book_list, name='book_list'),
+    path('borrow/<int:book_id>/', mv.borrow_book, name='borrow_book'),
+    path('return/<int:book_id>/', mv.return_book, name='return_book'),
 ]

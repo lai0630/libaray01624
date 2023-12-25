@@ -23,6 +23,11 @@ def showpost(request, slug):
 
 def log(request):
 	return render(request, 'login.html')
+
+def book_list(request):
+    books = Post.objects.all()
+    return render(request, 'book_list.html', {'books': books})
+
 	
 def borrow_book(request, book_id):
     book = get_object_or_404(Post, id=book_id)
@@ -41,3 +46,8 @@ def return_book(request, book_id):
         book.save()
 
     return HttpResponseRedirect(reverse('book_list'))
+
+def search(request):
+    kw = request.GET.get('keyWord')
+    books = Post.title.objects.filter(title__icontains=kw, isOn=True)
+    return render(request, 'search.html', {'books': books, 'keyWord': kw})
