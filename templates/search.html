@@ -7,30 +7,28 @@
 </div>
 {%endblock headmessage%}
 {% block content%}
-{% if not books %}
+{% if not posts %}
 <p style='font-family:微軟正黑體;font-size:14pt;font-weight:bold;'>沒有該書籍喔</p>
 {% else %}
-    {%for book in books%}
-        <div class='card'>
-            <div class='card-header'>
-                <p style='font-family:微軟正黑體;font-size:14pt;font-weight:bold;'>
-                    <a href='/book/{{book.id}}/'>{{book.title}}</a>
-                </p>
-            </div>
-            <br>
-            <div class='card-body' style='background-color:#ffffff'>
-                <p>作者:{{book.author}}</p>
-                <p>類型:<a href='/category/{{book.category_id}}/'>{{book.category}}</a></p>
-                <p>借閱量：{{book.borrow_count}}</p>
-                <p>館內餘量:{{book.available_quantity}}</p>
-            </div>
-            <div class='card-footer'  style='background-color:#cacaca'>
-                <p>
-                    {{ book.content | truncatechars:40 }}
-                </p>
-            </div>
-        </div>
-        <br>
-    {% endfor %}
+{% for post in posts %}
+<div class='card' style='background-color:#F5ECCF'>
+    <div class='card-header'>
+        <p style='font-family:微軟正黑體;font-size:20pt;font-weight:bolder;'>
+            <a href='/post/{{post.slug}}' style="color:713503">{{ post.title }}</a>
+        </p>
+    </div>
+    <div class='card-body' style='background-color:#FDFBF9'>
+        <p>
+           {{ post.body | truncatechars:40 }}
+        </p>
+    </div>
+    <div class='card-footer'  style='background-color:#F5ECCF;font-weight:bold;font-size:14pt;'>
+        <p>
+            發佈時間：{{ post.pub_date | date:"Y M d, h:m:s A"}}
+        </p>
+    </div>
+</div>
+<br><!--一個card放一行-->
+{% endfor %}
 {% endif %}
 {% endblock content %}

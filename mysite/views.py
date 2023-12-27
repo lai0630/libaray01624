@@ -48,6 +48,6 @@ def return_book(request, book_id):
     return HttpResponseRedirect(reverse('book_list'))
 
 def search(request):
-    kw = request.GET.get('keyWord')
-    books = Post.title.objects.filter(title__icontains=kw, isOn=True)
-    return render(request, 'search.html', {'books': books, 'keyWord': kw})
+    kw = request.GET.get('q')#抓表單的東西(看你header的名字)
+    posts = Post.objects.filter(title__icontains=kw)#title__icontains相似查詢
+    return render(request, 'search.html', {'posts': posts, 'keyWord': kw})
