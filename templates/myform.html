@@ -13,7 +13,7 @@
 <form action="" method="post"><!--如果寫成GET會出現在網址(輸入的東西) 如果改成post會出錯(如果要改)-->
     {% csrf_token %}<!--如果多這行 上面打POST就不會錯(要確定網址只有自己設得)-->
     <label for="title">心情:</label><br><!--標題-->
-    {% for m in moods %}
+    {% for m in form %}
     <input type='radio' name='mood' value='{{ m.status }}'>{{ m.status }}</input><!--status是在models裡面的 從資料庫抓出來的-->
     {% endfor %}
     <br>
