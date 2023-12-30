@@ -1,4 +1,7 @@
 from django.db import models
+from datetime import datetime
+from django.utils import timezone
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.CharField(max_length=200)
@@ -17,3 +20,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Mood(models.Model):#下拉式選單
+    status = models.CharField(max_length=10, null=False)
+
+    def __str__(self):
+        return self.status
+
+class Commet(models.Model):
+    mood = models.ForeignKey('Mood', on_delete=models.CASCADE)
+    nickname = models.CharField(max_length=10)
+    message = models.TextField(null=False)
+    del_pass = models.CharField(max_length=10)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    enabled = models.BooleanField(default=True)#預設讓他做顯示
+    
+
