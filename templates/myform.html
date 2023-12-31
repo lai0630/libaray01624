@@ -10,51 +10,12 @@
          {{ message }}
     </div>
 {% endif %}
-<form action="" method="post"><!--如果寫成GET會出現在網址(輸入的東西) 如果改成post會出錯(如果要改)-->
-    {% csrf_token %}<!--如果多這行 上面打POST就不會錯(要確定網址只有自己設得)-->
-    <label for="title">心情:</label><br><!--標題-->
-    {% for m in form %}
-    <input type='radio' name='mood' value='{{ m.status }}'>{{ m.status }}</input><!--status是在models裡面的 從資料庫抓出來的-->
-    {% endfor %}
-    <br>
-
-    心情留言板：<br/>
-    <textarea name='user_post' rows=3 cols=70></textarea><br/>
-    <label for='user_id'>你的暱稱：</label>
-    <input id='user_id' type='text' name='user_id'>
-    <label for='user_pass'>張貼密碼：</label>
-    <input id='user_pass' type='password' name='user_pass'><br/>
-    <input type='submit' value='張貼'>
-    <input type='reset' value='清除重填'>
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type='submit' value='送出'>
+    <input type="reset" value='清除重填'>
 </form>
-
-<div class='row'>
-    <div class='col-md-12'>
-        <div class='card'>
-            <div class='card-header' align=center>
-            <h3>~~test~~</h3>
-        </div>
-    </div>
-</div>
-
-</div>
-<div class="row">
-    {% for p in form %}<!--名字要跟views的一樣 不然會抓不到-->
-     <div class="col-sm-12 col-md-4">
-        <div class='card'>
-            <div class='card-header text-white bg-primary'>【{{ p.nickname }}】心情:{{ p.mood }}</div>
-            <div class='card-body'>{{ p.message | linebreaks }}</div>
-            <div class='card-footer' align='right'>
-                <i><small>{{ p.pub_time }}</small></i>
-                <i class="bi bi-trash"  onclick='go_delete({{p.id}})'></i>
-
-            </div>
-        </div>
-    </div>
-    {% empty %}
-        目前沒有任何心情留言
-    {% endfor %}
-</div> 
-
-
 {% endblock content %}

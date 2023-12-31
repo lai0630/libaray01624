@@ -26,7 +26,7 @@ class Mood(models.Model):
     def __str__(self):
         return self.status
 
-class Commet(models.Model):
+class Comment(models.Model):
     mood = models.ForeignKey('Mood', on_delete=models.CASCADE)
     nickname = models.CharField(max_length=10)
     message = models.TextField(null=False)

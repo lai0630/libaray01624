@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django import forms as LoginForm
 from django.shortcuts import render,get_object_or_404,HttpResponseRedirect,reverse
 from django.utils.text import slugify
-from mysite.forms import CommetForm
+from mysite.forms import CommentForm
 
 def homepage(request):
     posts = Post.objects.all()
@@ -54,14 +54,13 @@ def search(request):
     return render(request, 'search.html', {'posts': posts, 'keyWord': kw})
 
 from django.shortcuts import render
-from mysite import models
 
 def forms(request):#用這種
     if request.method == 'GET':
-        form = CommetForm()
+        form = CommentForm()
         return render(request,'myform.html',locals())#一定要回應
     elif request.method =='POST':
-        form = CommetForm(request.POST)#去request抓資料 把變數抓下來
+        form = CommentForm(request.POST)#去request抓資料 把變數抓下來
         if form.is_valid():#一定要寫這個(if以下的) 這個是要抓裡面的值
             form.save()  #這邊可以存是因為他在forms已經定義好了 不然要像18 19那行
         return render(request,'myform.html',locals())#一定要回應
