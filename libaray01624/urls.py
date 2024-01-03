@@ -31,5 +31,5 @@ urlpatterns = [
     path('search/',mv.search,name="search"),
     path('forms/',mv.forms,name='forms'),
     path('register/',mv.register,name='register'),
-    path('profile/',mv.profile)
+    path('profile/',mv.profile,name='profile'),
 ]
