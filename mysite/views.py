@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from mysite.models import Post,Mood
+from mysite.models import Post,Mood,Comment
 from datetime import datetime
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
@@ -58,9 +58,11 @@ from django.shortcuts import render
 def forms(request):#用這種
     if request.method == 'GET':
         form = CommentForm()
+        posts = Comment.objects.filter(enabled=True).order_by('-pub_time')[:30]
         return render(request,'myform.html',locals())#一定要回應
     elif request.method =='POST':
         form = CommentForm(request.POST)#去request抓資料 把變數抓下來
+        posts = Comment.objects.filter(enabled=True).order_by('-pub_time')[:30]
         if form.is_valid():#一定要寫這個(if以下的) 這個是要抓裡面的值
             form.save()  #這邊可以存是因為他在forms已經定義好了 不然要像18 19那行
         return render(request,'myform.html',locals())#一定要回應

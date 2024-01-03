@@ -18,4 +18,21 @@
     <input type='submit' value='送出'>
     <input type="reset" value='清除重填'>
 </form>
+<div class="row">
+    {% for p in posts %}<!--名字要跟views的一樣 不然會抓不到-->
+     <div class="col-sm-12 col-md-4">
+        <div class='card'>
+            <div class='card-header text-white bg-primary'>【{{ p.nickname }}】心情:{{ p.mood }}</div>
+            <div class='card-body'>{{ p.message | linebreaks }}</div>
+            <div class='card-footer' align='right'>
+                <i><small>{{ p.pub_time }}</small></i>
+                <i class="bi bi-trash"  onclick='go_delete({{p.id}})'></i>
+
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        目前沒有任何心情留言
+    {% endfor %}
+</div> 
 {% endblock content %}
