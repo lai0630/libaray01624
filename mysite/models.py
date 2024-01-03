@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.utils import timezone
+from django.contrib import auth
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -36,5 +37,21 @@ class Comment(models.Model):
     def __str__(self):
         return self.message
 
+class Preferences(models.Model):
+    status = models.CharField(max_length=10, null=False)
+    def __str__(self):
+        return self.status
     
+class Profile(models.Model):
+    Gender = (
+        ('M', '男性'),#前面是真正儲存的內容 後面是顯示的
+        ('W', '女性'),
+    )
+    user = models.OneToOneField(auth.models.User, on_delete=models.CASCADE)#一對一的欄位 指到的欄位是auth.models.User(內建的)
+    preferences = models.ForeignKey('Preferences', on_delete=models.CASCADE)
+    gender = models.CharField(max_length=5, choices=Gender)
+    favorite = models.CharField(max_length=10)
+	
+    def __str__(self):
+        return self.user.username   
 

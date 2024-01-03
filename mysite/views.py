@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from mysite.models import Post,Mood,Comment
+from mysite.models import Post,Mood,Comment,Profile
 from datetime import datetime
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
 from django import forms as LoginForm
 from django.shortcuts import render,get_object_or_404,HttpResponseRedirect,reverse
 from django.utils.text import slugify
-from mysite.forms import CommentForm
+from mysite.forms import CommentForm,UserRegisterForm,LoginForm,ProfileForm
+from django.contrib.auth.models import User
 
 def homepage(request):
     posts = Post.objects.all()
@@ -70,3 +71,84 @@ def forms(request):#用這種
     else:
         massge='ERROR'
         return render(request,'myform.html',locals())#一定要回應
+    
+def register(request):#會直接存到這個程式的資料庫 而不是admin
+    if request.method == 'GET':
+        form = UserRegisterForm()
+        return render(request,'register.html',locals())#一定要回應
+    elif request.method =='POST':
+        form = UserRegisterForm(request.POST)#去request抓資料 把變數抓下來
+        if form.is_valid():#一定要寫這個(if以下的) 這個是要抓裡面的值
+            user_name = form.cleaned_data['user_name']
+            user_email = form.cleaned_data['user_email']
+            user_password = form.cleaned_data['user_password']
+            user_password_confirm = form.cleaned_data['user_password_confirm']
+            if user_password == user_password_confirm:
+                user = User.objects.create_user(user_name,user_email,user_password)#有名字email password 密碼會加密
+                message=f'註冊成功'
+            else:
+                message=f'兩次密碼不一樣'
+        return render(request,'register.html',locals())#一定要回應
+    else:
+        massge='ERROR'
+        return render(request,'register.html',locals())#一定要回應
+    
+from django.contrib.auth import authenticate
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+def login (request):
+    if request.method == 'GET':
+        form = LoginForm()#代表會顯示的欄位 在forms那邊
+        return render(request,'login.html',locals())#一定要回應
+    elif request.method =='POST':
+        form = LoginForm(request.POST)#去request抓資料 把變數抓下來
+        if form.is_valid():#一定要寫這個(if以下的) 這個是要抓裡面的值
+            user_name = form.cleaned_data['user_name']
+            user_password = form.cleaned_data['user_password']
+            user = authenticate(username=user_name, password=user_password)
+            if user is not None:
+                if user.is_active:
+                    auth.login(request, user)
+                    print("success")
+                    message='成功'
+                    return redirect('/')
+                else:
+                    message='未啟用'
+            else:
+                message='失敗'
+        return render(request,'login.html',locals())#一定要回應
+    else:
+        massge='ERROR'
+        return render(request,'login.html',locals())#一定要回應
+
+@login_required(login_url='/login/') 
+def profile(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            username = request.user.username
+            try:
+                user = User.objects.get(username=username)
+                userinfo = Profile.objects.get(user=user)
+                form = ProfileForm(instance=userinfo)
+            except:
+                form = ProfileForm()
+        return render(request, 'userinfo.html', locals())
+    elif request.method == 'POST':
+        username = request.user.username
+        user = User.objects.get(username=username)
+        try:
+            userinfo = Profile.objects.get(user=user)
+            form = ProfileForm(request.POST, instance=userinfo)
+            form.save()
+            message = f'成功更新個人資料！'
+        except:
+            form = ProfileForm(request.POST)
+            userinfo = form.save(commit=False)
+            userinfo.user = user
+            userinfo.save()
+            message = f'成功新增！'    
+        return render(request, 'userinfo.html', locals())
+    else:
+        message = "ERROR"
+        print('出錯回首頁')
+        redirect("/")

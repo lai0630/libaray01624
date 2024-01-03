@@ -1,0 +1,21 @@
+<html>
+    {% load static %}
+    <div class='well'><body background="https://img.onl/e9SQF" style="background-size:2000px 1200px">
+    </div>
+    
+<head>
+    <link rel="icon" href="static/images/pic5.jpg" type="image/jpg" / >
+    <title>會員登入</title>
+    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br>    <br> 
+    <h1><a class="btn btn-sm" style="font-size:30px;" align="center" href='/'>回首頁</a></h1>
+</head>
+<form action="" method="post">
+        {% csrf_token %}
+        <table><!--上下記得要有table-->
+        {{ form.as_table }}<!--table(表格)跟p的差別 form是view那邊的變數-->
+        </table>
+        <input type='submit' value='登入'>
+        <input type='reset' value='清除重填'>
+</form> 
+
+</html>
