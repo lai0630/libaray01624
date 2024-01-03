@@ -65,6 +65,7 @@ def forms(request):#用這種
         posts = Comment.objects.filter(enabled=True).order_by('-pub_time')[:30]
         if form.is_valid():#一定要寫這個(if以下的) 這個是要抓裡面的值
             form.save()  #這邊可以存是因為他在forms已經定義好了 不然要像18 19那行
+            form = CommentForm()
         return render(request,'myform.html',locals())#一定要回應
     else:
         massge='ERROR'
