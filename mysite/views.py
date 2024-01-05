@@ -152,3 +152,8 @@ def profile(request):
         message = "ERROR"
         print('出錯回首頁')
         redirect("/")
+
+def logout(request):
+    auth.logout(request)
+    message = f'成功登出'
+    return redirect('/')

@@ -27,6 +27,9 @@
                                     <div calss="card-body"><!--card這個東西裡面的內容-->
                                         <div class="list-group" style='font-family:微軟正黑體;font-weight:bold;font-size:16pt;'>
                                             <a href='/' class="list-group-item" > 	&#x26AB;HOME</a><!--回到首頁-->
+                                            <a href="{% url 'login' %}"  class="list-group-item">&#x26AB;登入</a>
+                                            <a href="{% url 'register' %}"  class="list-group-item">&#x26AB;註冊</a>
+                                            <a href="{% url 'logout' %}"  class="list-group-item">&#x26AB;登出</a>
                                             <a href="{% url 'forms' %}" class="list-group-item">	&#x26AB;評論區</a><!--跑到該網址 並且標題是即時新聞-->
                                             <a href='https://www.ncl.edu.tw/' class="list-group-item">	&#x26AB;國家圖書館</a><!--跑到該網址 並且標題是Youtube-->
                                             <a href="{% url 'book_list' %}" class="list-group-item">&#x26AB;借還書系統</a>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mysite.models import Post,Mood,Comment
+from mysite.models import Post,Mood,Comment,BorrowingRecord
 from django.contrib import admin
 from mysite import models
 
@@ -12,8 +12,12 @@ class CommentAdmin(admin.ModelAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display=('preferences','gender','favorite')
+
+class BorrowingRecordAdmin(admin.ModelAdmin):
+    list_display = ['user', 'book', 'borrowing_date', 'actual_return_date', 'is_returned']
 admin.site.register(models.Mood)
 admin.site.register(models.Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(models.Preferences)
 admin.site.register(models.Profile,ProfileAdmin)
+admin.site.register(BorrowingRecord, BorrowingRecordAdmin)

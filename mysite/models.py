@@ -2,7 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 from django.contrib import auth
-
+from django.contrib.auth.models import User
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.CharField(max_length=200)
@@ -55,3 +55,13 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username   
 
+class BorrowingRecord(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    book = models.ForeignKey(Post, on_delete=models.CASCADE)
+    borrowing_date = models.DateField(auto_now_add=True)
+    actual_return_date = models.DateField(null=True, blank=True)
+    is_returned = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user} 借閱 {self.book}"
+    
