@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from mysite.models import Post,Mood,Comment,Profile
+from mysite.models import Post,Mood,Comment,Profile,BorrowingRecord
 from datetime import datetime
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
@@ -9,6 +9,8 @@ from django.shortcuts import render,get_object_or_404,HttpResponseRedirect,rever
 from django.utils.text import slugify
 from mysite.forms import CommentForm,UserRegisterForm,LoginForm,ProfileForm
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.contrib import messages
 
 def homepage(request):
     posts = Post.objects.all()
@@ -32,22 +34,46 @@ def book_list(request):
 
 	
 def borrow_book(request, book_id):
-    book = get_object_or_404(Post, id=book_id)
-
-    if not book.isBorrow:
-        book.isBorrow = True
-        book.save()
+    if request.user.is_active:
+        book = Post.objects.get(id=book_id)
+        if book!=book.isBorrow:
+            due_date = timezone.now() + timezone.timedelta(days=90)
+            borrowing_record = BorrowingRecord.objects.create(
+                user=request.user, 
+                book=book,
+                borrowing_date=timezone.now(),
+                is_returned=False, 
+            )
+            book.isBorrow=True
+            book.save()
+            return render(request, 'borrowBook.html', {'borrowing_record': borrowing_record,'msg':'借閱成功！'})
+        else:
+            return render(request, 'borrowBook.html', {'msg': '圖書暫不可借'})
+    else:
+        messages.warning(request, '尚未登入不可借書，請先登入')
+        return redirect('login')
 
     return HttpResponseRedirect(reverse('book_list'))
 
 def return_book(request, book_id):
-    book = get_object_or_404(Post, id=book_id)
+    if request.method=='POST':
+        u=None
+        returnCorrect=[]
+        returnBookList=request.POST.getlist('return_books')
+        for recordingId in returnBookList:
+            recording=BorrowingRecord.objects.get(id=recordingId)
+            recording.is_returned=True
+            recording.actual_return_date=timezone.now()
+            returnCorrect.append(recording)
+            recording.save()
 
-    if book.isBorrow:
-        book.isBorrow = False
-        book.save()
-
-    return HttpResponseRedirect(reverse('book_list'))
+            recording.book.isBorrow=False
+            recording.book.save()
+            u=recording.user
+        return render(request, 'returnBook.html',{'returnCorrect':returnCorrect,
+                                                  'u':u})
+    else:
+        return redirect('/')   
 
 def search(request):
     kw = request.GET.get('q')#抓表單的東西(看你header的名字)
@@ -157,3 +183,43 @@ def logout(request):
     auth.logout(request)
     message = f'成功登出'
     return redirect('/')
+
+def borrowBook(request, book_id):
+    if request.user.is_active:
+        book = Post.objects.get(id=book_id)
+        if book!=book.isBorrow:
+            due_date = timezone.now() + timezone.timedelta(days=90)
+            borrowing_record = BorrowingRecord.objects.create(
+                user=request.user, 
+                book=book,
+                borrowing_date=timezone.now(),
+                is_returned=False, 
+            )
+            book.isBorrow=True
+            book.save()
+            return render(request, 'borrowBook.html', {'borrowing_record': borrowing_record,'msg':'借閱成功！'})
+        else:
+            return render(request, 'borrowBook.html', {'msg': '圖書暫不可借'})
+    else:
+        messages.warning(request, '尚未登入不可借書，請先登入')
+        return redirect('login')
+    
+def returnBook(request):
+    if request.method=='POST':
+        u=None
+        returnCorrect=[]
+        returnBookList=request.POST.getlist('return_books')
+        for recordingId in returnBookList:
+            recording=BorrowingRecord.objects.get(id=recordingId)
+            recording.is_returned=True
+            recording.actual_return_date=timezone.now()
+            returnCorrect.append(recording)
+            recording.save()
+
+            recording.book.isBorrow=False
+            recording.book.save()
+            u=recording.user
+        return render(request, 'returnBook.html',{'returnCorrect':returnCorrect,
+                                                  'u':u})
+    else:
+        return redirect('/')   
