@@ -26,7 +26,7 @@
                     </div>
                     <div>
                         <a href="{% url 'borrow_book' book.id %}" class="btn btn-primary btn-sm">我要借書</a>
-                        <a href="{% url 'return_book' book.id %}" class="btn btn-warning btn-sm">我要還書</a>
+                        <a href="{% url 'return_book' book.id %}"onclick="alert('確認歸還此書嗎')" class="btn btn-warning btn-sm">我要還書</a>
                     </div>
                 </li>
             {% endfor %}

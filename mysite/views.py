@@ -55,22 +55,25 @@ def borrow_book(request, book_id):
 
     return HttpResponseRedirect(reverse('book_list'))
 
-def return_book(request, book_id):
-    u=None
-    returnCorrect=[]
-    returnBookList=request.POST.getlist('return_books')
-    for recordingId in returnBookList:
-        recording=BorrowingRecord.objects.get(id=recordingId)
-        recording.is_returned=True
-        recording.actual_return_date=timezone.now()
-        returnCorrect.append(recording)
-        recording.save()
+def return_book(request,id):
+    book = get_object_or_404(Post, id=id)
 
-        recording.book.isBorrow=False
-        recording.book.save()
-        u=recording.user
-    return render(request, 'returnBook.html',{'returnCorrect':returnCorrect,
-                                                  'u':u}) 
+    if not book.isBorrow:
+        return redirect('book_list')
+
+    returnBookList = BorrowingRecord.objects.filter(book=book,is_returned=False)
+
+    for record in returnBookList:
+        record.is_returned = True
+        record.actual_return_date = timezone.now()
+        record.save()
+
+        # 使用 recording.book 來獲取關聯的書籍對象
+        record.book.isBorrow = False
+        record.book.save()
+
+    return redirect('book_list')
+       
 
 def search(request):
     kw = request.GET.get('q')#抓表單的東西(看你header的名字)
