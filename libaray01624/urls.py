@@ -33,6 +33,4 @@ urlpatterns = [
     path('register/',mv.register,name='register'),
     path('profile/',mv.profile,name='profile'),
     path('logout/',mv.logout,name='logout'),
-    path('borrowBook/<int:book_id>',mv.borrowBook, name='borrowBook'),
-    path('returnBook/',mv.returnBook,name="returnBook"),
 ]
