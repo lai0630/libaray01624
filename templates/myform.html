@@ -10,7 +10,7 @@
          {{ message }}
     </div>
 {% endif %}
-<form action="" method="post">
+<form action="" method="post" style='font-family:微軟正黑體;font-weight:bold;font-size:18pt;'>
     {% csrf_token %}
     <table>
     {{ form.as_table }}
@@ -22,9 +22,9 @@
     {% for p in posts %}<!--名字要跟views的一樣 不然會抓不到-->
      <div class="col-sm-12 col-md-4">
         <div class='card'>
-            <div class='card-header 'align='left' style='background-color:#306754; font-family:微軟正黑體;font-size:18pt;font-weight:bold; color:#FFFFFF'>【{{ p.nickname }}】心情:{{ p.mood }}</div>
-            <div class='card-body' style="background-color:#C2DFFF; font-family:微軟正黑體;font-size:14pt;font-weight:bold;">{{ p.message | linebreaks }}</div>
-            <div class='card-footer' align='right' style='background-color:#306754; font-family:微軟正黑體;font-size:12pt;font-weight:bold; color:#FFFFFF'>
+            <div class='card-header 'align='left' style='background-color:#5B7493; color:#ffffff;font-family:微軟正黑體;font-size:18pt;font-weight:bold;'>【{{ p.nickname }}】心情:{{ p.mood }}</div>
+            <div class='card-body' style="background-color:#F5F4F0; font-family:微軟正黑體;font-size:14pt;font-weight:bold;">{{ p.message | linebreaks }}</div>
+            <div class='card-footer' align='right' style='background-color:#5B7493; color:#ffffff; font-family:微軟正黑體;font-size:12pt;font-weight:bold;'>
                 <i><small>{{ p.pub_time }}</small></i>
                 <i  class="bi bi-trash"  onclick='go_delete({{p.id}})'></i>
 

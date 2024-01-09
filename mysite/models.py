@@ -13,9 +13,9 @@ class Post(models.Model):
     @property
     def formatted_is_borrow(self):
         if self.isBorrow:
-            return '<span style="color:white;background-color:red;border: 1px soild white; padding: 3px; border-radius: 3px;">外借中</span>'
+            return '<span style="font-size: 20pt; color:white;background-color:#013E41;border: 1px soild white; padding: 3px; border-radius: 3px;">外借中</span>'
         else:
-            return '<span style="color:white;background-color:green;border: 1px soild white; padding: 3px; border-radius: 3px;">可借閱</span>'
+            return '<span style="font-size: 20pt; color:white;background-color:#6E4740;border: 1px soild white; padding: 3px; border-radius: 3px;">可借閱</span>'
     class Meta:
         ordering = ('-pub_date',)
 

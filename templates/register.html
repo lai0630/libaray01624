@@ -4,14 +4,14 @@
 {% block headmessage %} 
 {% endblock headmessage %}
 {% block content %}<!--在裡面放表單-->
-<h2>註冊帳號</h2>
+<h2 style='font-family:微軟正黑體;font-weight:bold;font-size:28pt;'>註冊帳號 </h2>
 {% if message %}<!--這邊的message是在views裡面的-->
     <div class='alert alert-warning'>
          {{ message }}
     </div>
 {% endif %}
 
-<form action="" method="post">
+<form action="" method="post" style='font-family:微軟正黑體;font-weight:bold;font-size:18pt;'>
     {% csrf_token %}
     <table><!--上下記得要有table-->
     {{ form.as_table }}<!--table(表格)跟p的差別 form是view那邊的變數-->

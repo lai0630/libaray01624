@@ -1,17 +1,17 @@
 {% extends 'base.html' %}<!--會先繼承base裡面的網站 然後如果後面有提到block ...就是post的把base的蓋掉-->
 
-{% block title %}登入帳號{% endblock title %}<!--存到資料庫-->
+{% block title %}{% endblock title %}<!--存到資料庫-->
 {% block headmessage %} 
 {% endblock headmessage %}
 {% block content %}<!--在裡面放表單-->
-<h2>登入帳號</h2>
+<h2 style='font-family:微軟正黑體;font-weight:bold;font-size:28pt;'>登入帳號</h2>
 {% if message %}<!--這邊的message是在views裡面的-->
-    <div class='alert alert-warning'>
+    <div class='alert alert-warning'  >
          {{ message }}
     </div>
 {% endif %}
 
-<form action="" method="post">
+<form action="" method="post" style='font-family:微軟正黑體;font-weight:bold;font-size:18pt;'>
     {% csrf_token %}
     <table><!--上下記得要有table-->
     {{ form.as_table }}<!--table(表格)跟p的差別 form是view那邊的變數-->

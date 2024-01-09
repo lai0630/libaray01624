@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block title %} 歡迎光臨正妹圖書館 {% endblock %}
 {% block headmessage %} 
-    <h3 style='font-family:微軟正黑體;font-size:24pt;font-weight:bolder;background-color:C6CEBE'>本館書籍列表&#x1F4E3;</a>
+    <h3 style='font-family:微軟正黑體;font-size:24pt;font-weight:bolder;background-color:abc8cc;'>本館書籍列表&#x1F52D;</a>
 {% endblock %}
 {% block content %} 
      {% for post in posts %}
-    <div class='card' style='background-color:#F5ECCF'>
+    <div class='card' style='background-color:#F7F0EA'>
         <div class='card-header'>
             <p style='font-family:微軟正黑體;font-size:20pt;font-weight:bolder;'>
                 <a href='/post/{{post.slug}}' style="color:713503">{{ post.title }}</a>
@@ -16,7 +16,7 @@
                {{ post.body | truncatechars:40 }}
             </p>
         </div>
-        <div class='card-footer'  style='background-color:#F5ECCF;font-weight:bold;font-size:14pt;'>
+        <div class='card-footer'  style='background-color:#F7F0EA;font-weight:bold;font-size:14pt;'>
             <p>
                 發佈時間：{{ post.pub_date | date:"Y M d, h:m:s A"}}
             </p>
