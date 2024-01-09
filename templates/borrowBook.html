@@ -8,7 +8,6 @@
 {%endblock headmessage%}
 {% block content%}
 {% if msg == '借閱成功！' %}
-    <img src="{{ borrowing_record.book.cover }}" style="width: 200px;">
     <h3 style='font-family:微軟正黑體;'>{{borrowing_record.book.title}}</h3>
     <p>借閱日期: {{ borrowing_record.borrowing_date}}</p>
 {% else %}

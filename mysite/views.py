@@ -196,3 +196,6 @@ def returnBookPage(request):
 
     else:
         return render(request,'returnBookPage.html',{'msg':' '})
+
+def returnrecord(request):
+    render(request,'returnrecord.html')
