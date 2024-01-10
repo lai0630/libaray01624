@@ -33,5 +33,6 @@ urlpatterns = [
     path('register/',mv.register,name='register'),
     path('profile/',mv.profile,name='profile'),
     path('logout/',mv.logout,name='logout'),
-    path('return/',mv.returnrecord)
+    path('borrowlist/',mv.getBorrowListByUser,name='borrowList'),
+    path('addbook/',mv.addBook,name='addbook')
 ]

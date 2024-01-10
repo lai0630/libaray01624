@@ -184,6 +184,7 @@ def logout(request):
     message = f'成功登出'
     return redirect('/')
 
+@login_required
 def returnBookPage(request):
     if request.method=='POST':
         name=request.POST.get('username')
@@ -199,3 +200,21 @@ def returnBookPage(request):
 
 def returnrecord(request):
     render(request,'returnrecord.html')
+
+@login_required
+def getBorrowListByUser(request):
+    borrowList=BorrowingRecord.objects.filter(user=request.user).order_by('-borrowing_date','-is_returned')
+    return render(request,'getBorrowList.html',locals())
+
+def addBook(request):
+    if request.method=='POST':
+        title = request.POST.get('title')
+        slug = request.POST.get('slug')
+        body = request.POST.get('body')
+        pub_date = request.POST.get('pub_date')
+        book=Post.objects.create(title=title,slug=slug,body=body,pub_date=pub_date
+                                )
+        msg='新增成功'
+        return render(request, 'addBook.html', locals())
+    else:
+        return render(request, 'addBook.html')

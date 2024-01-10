@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{%block title%}正妹圖書館{% endblock title %}
+{% block headmessage %}
+<div style="display: flex;justify-content: space-between; align-items: center;">
+    <h3 style='font-family:微軟正黑體;'>借閱紀錄</h3>
+    <a style='font-family:微軟正黑體;' href="/">回首頁</a>
+</div>
+{%endblock headmessage%}
+{% block content%}
+{% if borrowList %}
+    <table>
+        <tr>
+            <td>書名</td>
+            <td>借閱日期</td>
+            <td>是否歸還</td>
+        </tr>
+        {% for l in borrowList %}
+            <tr>
+                <td>{{ l.book.title }}</td>
+                <td>{{ l.borrowing_date }}</td>
+                {% now "Y-m-d" as current_datetime %}
+                <td>{{ l.is_returned}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>尚未有借閱資料</p>
+{% endif %}
+{% endblock content %}
