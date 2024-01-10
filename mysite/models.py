@@ -8,7 +8,7 @@ class Post(models.Model):
     slug = models.CharField(max_length=200)
     body = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
-    isBorrow = models.BooleanField(("外借中"),default=False)
+    isBorrow = models.BooleanField(("外借中"),default=True)
     
     @property
     def formatted_is_borrow(self):

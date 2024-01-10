@@ -36,8 +36,7 @@ def book_list(request):
 def borrow_book(request, book_id):
     if request.user.is_active:
         book = Post.objects.get(id=book_id)
-        if book!=book.isBorrow:
-            due_date = timezone.now() + timezone.timedelta(days=90)
+        if not book.isBorrow:
             borrowing_record = BorrowingRecord.objects.create(
                 user=request.user, 
                 book=book,
@@ -48,6 +47,7 @@ def borrow_book(request, book_id):
             book.save()
             return render(request, 'borrowBook.html', {'borrowing_record': borrowing_record,'msg':'借閱成功！'})
         else:
+            message=f'暫時不可以借'
             return render(request, 'borrowBook.html', {'msg': '圖書暫不可借'})
     else:
         messages.warning(request, '尚未登入不可借書，請先登入')
@@ -57,23 +57,24 @@ def borrow_book(request, book_id):
 
 def return_book(request,id):
     book = get_object_or_404(Post, id=id)
-
     if not book.isBorrow:
         return redirect('book_list')
 
-    returnBookList = BorrowingRecord.objects.filter(book=book,is_returned=False)
-
-    for record in returnBookList:
-        record.is_returned = True
-        record.actual_return_date = timezone.now()
-        record.save()
+    returnBookList = BorrowingRecord.objects.filter(book=book,is_returned=False,user=request.user)
+    if returnBookList:
+        for record in returnBookList:
+            record.is_returned = True
+            record.actual_return_date = timezone.now()
+            record.save()
 
         # 使用 recording.book 來獲取關聯的書籍對象
-        record.book.isBorrow = False
-        record.book.save()
-
-    return redirect('book_list')
-       
+            record.book.isBorrow = False
+            record.book.save()
+            return redirect('book_list')
+     
+    else:
+        return render(request,'wrongmessage.html')
+  
 
 def search(request):
     kw = request.GET.get('q')#抓表單的東西(看你header的名字)

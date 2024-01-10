@@ -40,6 +40,7 @@
                                                     <a href="{% url 'logout' %}"  class="list-group-item">&#x26AB;登出</a>
                                                     <a href="{% url 'forms' %}" class="list-group-item">	&#x26AB;評論區</a><!--跑到該網址 並且標題是即時新聞-->
                                                     <a href="{% url 'book_list' %}" class="list-group-item">&#x26AB;借還書系統</a>
+                                                    <a href="{% url 'borrowList' %}" class="list-group-item">&#x26AB;借閱紀錄</a>
                                                     <a href="{% url 'profile' %}" class="list-group-item">&#x26AB;個人資料維護</a>
                                                 {% endif %}
                                             {% else %}<!--沒有登入-->
