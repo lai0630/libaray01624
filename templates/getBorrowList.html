@@ -2,24 +2,24 @@
 {%block title%}正妹圖書館{% endblock title %}
 {% block headmessage %}
 <div style="display: flex;justify-content: space-between; align-items: center;">
-    <h3 style='font-family:微軟正黑體;'>借閱紀錄</h3>
-    <a style='font-family:微軟正黑體;' href="/">回首頁</a>
+    <h3 style='font-family:微軟正黑體;font-weight:bold;font-size:24pt'>借閱紀錄</h3>
+    <a style='font-family:微軟正黑體;font-weight:bold;font-size:18pt;' href="/">回首頁</a>
 </div>
 {%endblock headmessage%}
 {% block content%}
 {% if borrowList %}
     <table>
         <tr>
-            <td>書名</td>
-            <td>借閱日期</td>
-            <td>是否歸還</td>
+            <td style='font-family:微軟正黑體; font-weight:bold;font-size:20pt;background-color:#013E41;color:ffffff'>書名&nbsp;</td>
+            <td style='font-family:微軟正黑體; font-weight:bold;font-size:20pt;background-color:#013E41;color:ffffff'>借閱日期&nbsp;</td>
+            <td style='font-family:微軟正黑體; font-weight:bold;font-size:20pt;background-color:#013E41;color:ffffff'>是否歸還&nbsp;&nbsp;&nbsp;</td>
         </tr>
         {% for l in borrowList %}
             <tr>
-                <td>{{ l.book.title }}</td>
-                <td>{{ l.borrowing_date }}</td>
+                <td style='font-family:微軟正黑體; font-weight:bold;font-size:16pt;background-color:#A6BAAF'>{{ l.book.title }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td style='font-family:微軟正黑體; font-weight:bold;font-size:16pt;background-color:#A6BAAF'>{{ l.borrowing_date }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 {% now "Y-m-d" as current_datetime %}
-                <td>{{ l.is_returned}}</td>
+                <td style='font-family:微軟正黑體; font-weight:bold;font-size:16pt;background-color:#A6BAAF'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ l.is_returned}}</td>
             </tr>
         {% endfor %}
     </table>

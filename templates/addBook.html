@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{%block title%}猴子的叢林{% endblock title %}
+{%block title%}正妹圖書館{% endblock title %}
 {% block headmessage %}
 <div style="display: flex;justify-content: space-between; align-items: center;">
-    <h3 style='font-family:微軟正黑體;'>新增書籍</h3>
-    <a style='font-family:微軟正黑體;' href="/">回首頁</a>
+    <h3 style='font-family:微軟正黑體;font-weight:bold;font-size:28pt;'>新增書籍</h3>
+    <a style='font-family:微軟正黑體;font-weight:bold;font-size:18pt;' href="/">回首頁</a>
 </div>
 {%endblock headmessage%}
 {% block content%}
@@ -11,17 +11,17 @@
     <h3 style="color: red;">{{ msg }}</h3>
     {% csrf_token %}
     <div class="field">
-        <label for="title">書名： </label>
+        <label for="title" style='font-family:微軟正黑體;font-weight:bold;font-size:20pt;color:#000088'>書名: </label>
         <input type="text" name="title" id="">
     </div>
     <div class="field">
-        <label for="body">書籍介紹 </label>
+        <label for="body" style='font-family:微軟正黑體;font-weight:bold;font-size:20pt;color:#000088'>書籍介紹: </label>
         <input type="text" name="body" id="">
     </div>
     <div class="field">
-        <label for="slug">書籍網址 </label>
+        <label for="slug" style='font-family:微軟正黑體;font-weight:bold;font-size:20pt;color:#000088'>書籍網址: </label>
         <input type="text" name="slug" id="">
-    </div>
-    <input type="submit" value="新增">
+    </div><br><br>
+    <input type="submit" value="新增" style='font-family:微軟正黑體;font-weight:bold;font-size:18pt;'>
 </form>
 {% endblock content %}
