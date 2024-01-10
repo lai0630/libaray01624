@@ -29,7 +29,7 @@
                                             {% if request.user.is_active %}<!--用判斷的方式有沒有登入-->
                                                 {% if request.user.is_superuser%}<!--用判斷的方式看是不是超級使用者 如果是旁邊就會顯示這些-->
                                                     <a href='/' class="list-group-item" > 	&#x26AB;HOME</a><!--回到首頁-->
-                                                    <a href="{% url 'login' %}"  class="list-group-item">&#x26AB;登入</a>
+                                                    <a href="{% url 'logout' %}"  class="list-group-item">&#x26AB;登出</a>
                                                     <a href="{% url 'forms' %}" class="list-group-item">	&#x26AB;評論區</a><!--跑到該網址 並且標題是即時新聞-->
                                                     <a href="{% url 'book_list' %}" class="list-group-item">&#x26AB;借還書系統</a>
                                                     <a href="{% url 'profile' %}" class="list-group-item">&#x26AB;個人資料維護</a>
